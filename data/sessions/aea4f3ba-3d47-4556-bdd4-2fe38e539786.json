@@ -161,6 +161,48 @@
         }
       ],
       "data_file": "/Users/haihuang.hh/Documents/code/interactive_data_analysis/app/../data/datasets/c123a1db-f595-4d81-90e5-ec9b35f57f75.csv"
+    },
+    "0bac07c5-2261-4034-97b0-52ff0d17549b": {
+      "name": "用户点击行为日志.xlsx",
+      "type": "uploaded",
+      "preview": [
+        {
+          "用户id": "ios_3fec2b77077f4ade96676f6267e820c1_sara",
+          "商品id": 39755229,
+          "国家": "FR",
+          "性别(1为男,2为女,0未知)": 2.0,
+          "类目": "时尚拖鞋"
+        },
+        {
+          "用户id": "ios_0564d6a1c7214c258bc0b2ea9e95680b_sara",
+          "商品id": 39827270,
+          "国家": "DE",
+          "性别(1为男,2为女,0未知)": 2.0,
+          "类目": "手镯"
+        },
+        {
+          "用户id": "ios_6ba589738da942618959ce7e5b78efdb_sara",
+          "商品id": 39908073,
+          "国家": "ES",
+          "性别(1为男,2为女,0未知)": 2.0,
+          "类目": "手机耳机"
+        },
+        {
+          "用户id": "web_h5_21f08b82b9d941ddbc384867ff5b2f68",
+          "商品id": 39973051,
+          "国家": "SA",
+          "性别(1为男,2为女,0未知)": 0.0,
+          "类目": "户外椅子凳子"
+        },
+        {
+          "用户id": "ios_842d4480139447bc927da2783d71d3a4_sara",
+          "商品id": 39489244,
+          "国家": "FR",
+          "性别(1为男,2为女,0未知)": 2.0,
+          "类目": "时尚/休闲套装"
+        }
+      ],
+      "path": "/Users/haihuang.hh/Documents/code/interactive_data_analysis/app/../static/uploads/321ee1f1-00a5-4771-9c50-cc09f2782298.xlsx"
     }
   },
   "history": [
