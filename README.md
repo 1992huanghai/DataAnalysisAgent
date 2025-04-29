@@ -24,7 +24,8 @@
 - React Bootstrap
 - Plotly.js
 
-## 快速开始
+## 安装指南
+
 ### 环境要求
 - Node.js 18+
 - Python 3.10+
@@ -40,7 +41,77 @@ cd frontend
 npm install
 ```
 
-### 运行系统
+1. 安装Python依赖：
+```bash
+pip install -r requirements.txt
+```
+
+2. 安装额外依赖（包含python-dotenv）：
+```bash
+pip install python-dotenv
+```
+
+## 环境配置 / Environment Configuration
+
+### 必要配置项
+- `SILICON_FLOW_API_KEY`: 从[硅基流动平台](https://platform.siliconflow.cn)获取API密钥  
+  _Get API key from [SiliconFlow Platform](https://platform.siliconflow.cn)_
+- `SILICON_LLM_MODEL_NAME`: 使用的LLM模型名称  
+  _LLM model name to use_
+
+### 安全警告 ⚠️
+- 永远不要将.env文件提交到版本控制系统  
+  _Never commit .env file to version control_
+- 定期轮换API密钥  
+  _Rotate API keys regularly_
+- 仅授予必要权限  
+  _Grant minimum required permissions_
+
+示例.env文件：
+```env
+# 硅基流动API配置
+SILICON_FLOW_API_KEY=your_api_key_here
+SILICON_FLOW_API_BASE=https://api.siliconflow.cn/v1
+
+# 模型配置
+SILICON_LLM_MODEL_NAME=deepseek-ai/DeepSeek-R1-Distill-Qwen-7B
+```
+### 环境要求
+- Node.js 18+
+- Python 3.10+
+
+### 后端安装
+```bash
+pip install -r requirements.txt
+```
+
+### 前端安装
+```bash
+cd frontend
+npm install
+```
+
+### 运行指南
+
+将配置好的.env文件放置在项目根目录：
+```
+/项目根目录/
+├── .env       <-- 配置文件位置
+├── app/
+├── config/
+└── ...
+```
+
+启动后端服务：
+```bash
+uvicorn app.main:app --reload
+```
+
+启动前端应用：
+```bash
+cd frontend
+npm start
+```
 启动后端服务：
 ```bash
 uvicorn app.main:app --reload
