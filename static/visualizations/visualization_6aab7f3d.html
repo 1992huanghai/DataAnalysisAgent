@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点击量分布饼图</title>
+    <!-- 引入ECharts库 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+    <!-- 引入ECharts-gl扩展（可选，用于增强交互） -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts-gl@2.0.8/dist/echarts-gl.min.js"></script>
+    <style>
+        /* 设置页面基本样式 */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        /* 设置图表容器样式 */
+        #mainChart {
+            width: 100%;
+            height: 600px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>点击量分布饼图</h1>
+    <div id="mainChart"></div>
+
+    <script>
+        // 初始化图表容器
+        var myChart = echarts.init(document.getElementById('mainChart'));
+
+        // 处理数据
+        const data = [
+            [
+                "df_0",
+                [
+                    {
+                        "类目": "女式板鞋",
+                        "点击量": 4245
+                    },
+                    {
+                        "类目": "男士跑步鞋",
+                        "点击量": 1456
+                    },
+                    {
+                        "类目": "运动鞋",
+                        "点击量": 453
+                    },
+                    {
+                        "类目": "休闲鞋",
+                        "点击量": 349
+                    },
+                    {
+                        "类目": "时尚/休闲套装",
+                        "点击量": 335
+                    }
+                ]
+            ]
+        ];
+
+        // 提取类目和点击量数据
+        const categories = [];
+        const values = [];
+        data[0][1].forEach(item => {
+            categories.push(item['类目']);
+            values.push(item['点击量']);
+        });
+
+        // 配置图表选项
+        const option = {
+            title: {
+                text: '点击量分布',
+                left: 'center',
+                top: 20,
+                textStyle: {
+                    fontSize: 20,
+                    fontWeight: 'bold',
+                    color: '#333'
+                }
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b}: {c} ({d}%)'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'right',
+                top: 20,
+                textStyle: {
+                    color: '#666'
+                }
+            },
+            series: [
+                {
+                    name: '点击量',
+                    type: 'pie',
+                    radius: ['50%', '70%'],
+                    center: ['50%', '50%'],
+                    data: categories.map((name, index) => ({
+                        name: name,
+                        value: values[index]
+                    })),
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    },
+                    animation: true,
+                    animationDuration: 1000
+                }
+            ]
+        };
+
+        // 渲染图表
+        myChart.setOption(option);
+
+        // 添加响应式布局
+        window.addEventListener('resize', function () {
+            myChart.resize();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>男女消费习惯对比</title>
+    <!-- 引入ECharts库 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #chart-container {
+            width: 100%;
+            height: 600px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>男女消费习惯对比</h1>
+    <div id="chart-container"></div>
+
+    <script>
+        // 完整数据
+        const data = [
+            {
+                "性别(1为男,2为女,0未知)": 2.0,
+                "类目": "女式板鞋",
+                "count": 3502,
+                "性别": "女"
+            },
+            {
+                "性别(1为男,2为女,0未知)": 2.0,
+                "类目": "男士跑步鞋",
+                "count": 663,
+                "性别": "女"
+            },
+            {
+                "性别(1为男,2为女,0未知)": 2.0,
+                "类目": "运动鞋",
+                "count": 386,
+                "性别": "女"
+            },
+            {
+                "性别(1为男,2为女,0未知)": 2.0,
+                "类目": "休闲鞋",
+                "count": 276,
+                "性别": "女"
+            },
+            {
+                "性别(1为男,2为女,0未知)": 2.0,
+                "类目": "单肩包",
+                "count": 264,
+                "性别": "女"
+            },
+            {
+                "性别(1为男,2为女,0未知)": 0.0,
+                "类目": "女式板鞋",
+                "count": 250,
+                "性别": "未知"
+            },
+            {
+                "性别(1为男,2为女,0未知)": 0.0,
+                "类目": "男士跑步鞋",
+                "count": 107,
+                "性别": "未知"
+            },
+            {
+                "性别(1为男,2为女,0未知)": 0.0,
+                "类目": "地毯",
+                "count": 56,
+                "性别": "未知"
+            },
+            {
+                "性别(1为男,2为女,0未知)": 0.0,
+                "类目": "床品套件/四件套/多件套",
+                "count": 44,
+                "性别": "未知"
+            },
+            {
+                "性别(1为男,2为女,0未知)": 0.0,
+                "类目": "欧美模特套装",
+                "count": 37,
+                "性别": "未知"
+            },
+            {
+                "性别(1为男,2为女,0未知)": 1.0,
+                "类目": "男士跑步鞋",
+                "count": 686,
+                "性别": "男"
+            },
+            {
+                "性别(1为男,2为女,0未知)": 1.0,
+                "类目": "女式板鞋",
+                "count": 493,
+                "性别": "男"
+            },
+            {
+                "性别(1为男,2为女,0未知)": 1.0,
+                "类目": "时尚/休闲套装",
+                "count": 165,
+                "性别": "男"
+            },
+            {
+                "性别(1为男,2为女,0未知)": 1.0,
+                "类目": "休闲短裤",
+                "count": 122,
+                "性别": "男"
+            },
+            {
+                "性别(1为男,2为女,0未知)": 1.0,
+                "类目": "短袖T恤",
+                "count": 112,
+                "性别": "男"
+            }
+        ];
+
+        // 数据处理
+        const categories = Array.from(new Set(data.map(item => item['类目'])));
+        const maleData = categories.map(category => {
+            const item = data.find(d => d['类目'] === category && d['性别'] === '男');
+            return item ? item['count'] : 0;
+        });
+        const femaleData = categories.map(category => {
+            const item = data.find(d => d['类目'] === category && d['性别'] === '女');
+            return item ? item['count'] : 0;
+        });
+
+        // 初始化图表
+        const chart = echarts.init(document.getElementById('chart-container'));
+        
+        // 配置图表
+        const option = {
+            title: {
+                text: '男女消费习惯对比',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'axis',
+                formatter: '{b}<br/>{a0}: {c0}<br/>{a1}: {c1}'
+            },
+            legend: {
+                data: ['男性', '女性'],
+                bottom: 10
+            },
+            xAxis: {
+                type: 'category',
+                data: categories,
+                axisLabel: {
+                    rotate: 45,
+                    interval: 0
+                }
+            },
+            yAxis: {
+                type: 'value',
+                name: '消费数量'
+            },
+            series: [
+                {
+                    name: '男性',
+                    type: 'bar',
+                    data: maleData,
+                    color: '#4EC0CA'
+                },
+                {
+                    name: '女性',
+                    type: 'bar',
+                    data: femaleData,
+                    color: '#FF6B6B'
+                }
+            ],
+            dataZoom: [
+                {
+                    type: 'inside'
+                }
+            ]
+        };
+
+        // 渲染图表
+        chart.setOption(option);
+
+        // 自适应窗口大小
+        window.addEventListener('resize', () => {
+            chart.resize();
+        });
+    </script>
+</body>
+</html>

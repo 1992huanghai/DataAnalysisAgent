@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>国家用户分布饼图</title>
+    <!-- 引入ECharts库 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+    <style>
+        /* 设置图表容器样式 */
+        #main {
+            width: 100%;
+            height: 600px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>国家用户分布饼图</h1>
+    <div id="main"></div>
+
+    <script>
+        // 处理数据
+        const rawData = [
+            {
+                "国家": NaN,
+                "用户数": 1
+            },
+            {
+                "国家": "AE",
+                "用户数": 4
+            },
+            {
+                "国家": "AT",
+                "用户数": 5
+            },
+            {
+                "国家": "AU",
+                "用户数": 15
+            },
+            {
+                "国家": "CA",
+                "用户数": 1
+            },
+            {
+                "国家": "CH",
+                "用户数": 3
+            },
+            {
+                "国家": "CN",
+                "用户数": 1
+            },
+            {
+                "国家": "CZ",
+                "用户数": 6
+            },
+            {
+                "国家": "DE",
+                "用户数": 972
+            },
+            {
+                "国家": "DK",
+                "用户数": 1
+            },
+            {
+                "国家": "EG",
+                "用户数": 1
+            },
+            {
+                "国家": "ES",
+                "用户数": 2979
+            },
+            {
+                "国家": "FR",
+                "用户数": 2624
+            },
+            {
+                "国家": "GB",
+                "用户数": 2725
+            },
+            {
+                "国家": "GR",
+                "用户数": 24
+            },
+            {
+                "国家": "HR",
+                "用户数": 2
+            },
+            {
+                "国家": "HU",
+                "用户数": 189
+            },
+            {
+                "国家": "IQ",
+                "用户数": 1
+            },
+            {
+                "国家": "IT",
+                "用户数": 110
+            },
+            {
+                "国家": "KW",
+                "用户数": 5
+            },
+            {
+                "国家": "MX",
+                "用户数": 1
+            },
+            {
+                "国家": "NO",
+                "用户数": 1
+            },
+            {
+                "国家": "OM",
+                "用户数": 1
+            },
+            {
+                "国家": "PL",
+                "用户数": 15
+            },
+            {
+                "国家": "PT",
+                "用户数": 142
+            },
+            {
+                "国家": "QA",
+                "用户数": 1
+            },
+            {
+                "国家": "SA",
+                "用户数": 163
+            },
+            {
+                "国家": "SK",
+                "用户数": 2
+            },
+            {
+                "国家": "US",
+                "用户数": 5
+            }
+        ];
+
+        // 过滤无效数据并整理为ECharts所需格式
+        const processedData = rawData
+            .filter(item => item.国家 !== NaN && item.用户数 > 0)
+            .map(item => ({
+                name: item.国家,
+                value: item.用户数
+            }));
+
+        // 初始化图表
+        const myChart = echarts.init(document.getElementById('main'));
+
+        // 配置图表选项
+        const option = {
+            title: {
+                text: '国家用户分布',
+                left: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b}: {c} ({d}%)'
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left'
+            },
+            series: [
+                {
+                    name: '用户数',
+                    type: 'pie',
+                    data: processedData,
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+
+        // 使用配置项和数据重新生成图表
+        myChart.setOption(option);
+    </script>
+</body>
+</html>

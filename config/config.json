@@ -1,0 +1,14 @@
+{
+  "data": {
+    "max_upload_size_mb": 10,
+    "allowed_extensions": [
+      ".csv",
+      ".xlsx",
+      ".xls"
+    ]
+  },
+  "ui": {
+    "theme": "light",
+    "language": "zh-CN"
+  }
+}

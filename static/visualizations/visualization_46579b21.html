@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>用户分布饼图</title>
+    <!-- 引入ECharts库 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+    <style>
+        .chart-container {
+            width: 80%;
+            height: 600px;
+            margin: 50px auto;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            padding: 20px;
+        }
+    </style>
+
+<script>
+// 注入完整数据集 - 由系统自动添加
+const df_0 = [{"\u56fd\u5bb6":null,"\u7528\u6237\u6570":1},{"\u56fd\u5bb6":"AE","\u7528\u6237\u6570":4},{"\u56fd\u5bb6":"AT","\u7528\u6237\u6570":5},{"\u56fd\u5bb6":"AU","\u7528\u6237\u6570":15},{"\u56fd\u5bb6":"CA","\u7528\u6237\u6570":1},{"\u56fd\u5bb6":"CH","\u7528\u6237\u6570":3},{"\u56fd\u5bb6":"CN","\u7528\u6237\u6570":1},{"\u56fd\u5bb6":"CZ","\u7528\u6237\u6570":6},{"\u56fd\u5bb6":"DE","\u7528\u6237\u6570":972},{"\u56fd\u5bb6":"DK","\u7528\u6237\u6570":1},{"\u56fd\u5bb6":"EG","\u7528\u6237\u6570":1},{"\u56fd\u5bb6":"ES","\u7528\u6237\u6570":2979},{"\u56fd\u5bb6":"FR","\u7528\u6237\u6570":2624},{"\u56fd\u5bb6":"GB","\u7528\u6237\u6570":2725},{"\u56fd\u5bb6":"GR","\u7528\u6237\u6570":24},{"\u56fd\u5bb6":"HR","\u7528\u6237\u6570":2},{"\u56fd\u5bb6":"HU","\u7528\u6237\u6570":189},{"\u56fd\u5bb6":"IQ","\u7528\u6237\u6570":1},{"\u56fd\u5bb6":"IT","\u7528\u6237\u6570":110},{"\u56fd\u5bb6":"KW","\u7528\u6237\u6570":5},{"\u56fd\u5bb6":"MX","\u7528\u6237\u6570":1},{"\u56fd\u5bb6":"NO","\u7528\u6237\u6570":1},{"\u56fd\u5bb6":"OM","\u7528\u6237\u6570":1},{"\u56fd\u5bb6":"PL","\u7528\u6237\u6570":15},{"\u56fd\u5bb6":"PT","\u7528\u6237\u6570":142},{"\u56fd\u5bb6":"QA","\u7528\u6237\u6570":1},{"\u56fd\u5bb6":"SA","\u7528\u6237\u6570":163},{"\u56fd\u5bb6":"SK","\u7528\u6237\u6570":2},{"\u56fd\u5bb6":"US","\u7528\u6237\u6570":5}];
+console.log('数据集 df_0 已加载，共 29 行');
+</script>
+</head>
+<body>
+    <div class="chart-container" id="main"></div>
+
+    <script>
+        // 假设数据已注入到df_0变量中
+
+        // 处理数据
+        const countries = df_0["国家"];
+        const userCounts = df_0["用户数"];
+        
+        // 创建数据数组
+        const dataArray = countries.map((country, index) => {
+            return {
+                name: country || '未知',
+                value: userCounts[index]
+            };
+        }).filter(item => item.name !== 'NaN'); // 过滤掉无效数据
+
+        // 初始化图表
+        const myChart = echarts.init(document.getElementById('main'));
+
+        // 配置图表选项
+        const option = {
+            title: {
+                text: '用户分布饼图',
+                left: 'center',
+                top: '20',
+                textStyle: {
+                    fontSize: 20,
+                    fontWeight: 'bold'
+                }
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{b}: {c} ({d}%)'
+            },
+            series: [
+                {
+                    name: '用户分布',
+                    type: 'pie',
+                    data: dataArray,
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    },
+                    label: {
+                        show: true,
+                        position: 'outside',
+                        formatter: '{d}%'
+                    },
+                    labelLine: {
+                        show: true
+                    }
+                }
+            ]
+        };
+
+        // 渲染图表
+        myChart.setOption(option);
+    </script>
+</body>
+</html>

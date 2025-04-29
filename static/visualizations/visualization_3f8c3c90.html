@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>各国用户分布</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+
+<script>
+const df_0 = [{"\u56fd\u5bb6":null,"\u7528\u6237\u6570":1},{"\u56fd\u5bb6":"AE","\u7528\u6237\u6570":4},{"\u56fd\u5bb6":"AT","\u7528\u6237\u6570":5},{"\u56fd\u5bb6":"AU","\u7528\u6237\u6570":15},{"\u56fd\u5bb6":"CA","\u7528\u6237\u6570":1},{"\u56fd\u5bb6":"CH","\u7528\u6237\u6570":3},{"\u56fd\u5bb6":"CN","\u7528\u6237\u6570":1},{"\u56fd\u5bb6":"CZ","\u7528\u6237\u6570":6},{"\u56fd\u5bb6":"DE","\u7528\u6237\u6570":972},{"\u56fd\u5bb6":"DK","\u7528\u6237\u6570":1},{"\u56fd\u5bb6":"EG","\u7528\u6237\u6570":1},{"\u56fd\u5bb6":"ES","\u7528\u6237\u6570":2979},{"\u56fd\u5bb6":"FR","\u7528\u6237\u6570":2624},{"\u56fd\u5bb6":"GB","\u7528\u6237\u6570":2725},{"\u56fd\u5bb6":"GR","\u7528\u6237\u6570":24},{"\u56fd\u5bb6":"HR","\u7528\u6237\u6570":2},{"\u56fd\u5bb6":"HU","\u7528\u6237\u6570":189},{"\u56fd\u5bb6":"IQ","\u7528\u6237\u6570":1},{"\u56fd\u5bb6":"IT","\u7528\u6237\u6570":110},{"\u56fd\u5bb6":"KW","\u7528\u6237\u6570":5},{"\u56fd\u5bb6":"MX","\u7528\u6237\u6570":1},{"\u56fd\u5bb6":"NO","\u7528\u6237\u6570":1},{"\u56fd\u5bb6":"OM","\u7528\u6237\u6570":1},{"\u56fd\u5bb6":"PL","\u7528\u6237\u6570":15},{"\u56fd\u5bb6":"PT","\u7528\u6237\u6570":142},{"\u56fd\u5bb6":"QA","\u7528\u6237\u6570":1},{"\u56fd\u5bb6":"SA","\u7528\u6237\u6570":163},{"\u56fd\u5bb6":"SK","\u7528\u6237\u6570":2},{"\u56fd\u5bb6":"US","\u7528\u6237\u6570":5}];
+</script>
+</head>
+<body>
+    <div id="main" style="width: 800px;height:600px;"></div>
+    <script>
+        // 数据处理
+        const data = [
+            {
+                "国家": [
+                    NaN,
+                    "AE",
+                    "AT",
+                    "AU",
+                    "CA"
+                ],
+                "用户数": [
+                    1,
+                    4,
+                    5,
+                    15,
+                    1
+                ]
+            }
+        ];
+
+        // 过滤NaN值并提取有效数据
+        const processedData = data[0].国家
+            .map((country, index) => ({
+                name: country,
+                value: data[0].用户数[index]
+            }))
+            .filter(item => item.name !== NaN);
+
+        // 计算总用户数
+        const total = processedData.reduce((sum, item) => sum + item.value, 0);
+
+        // 计算百分比
+        const formattedData = processedData.map(item => ({
+            name: item.name,
+            value: item.value,
+            percent: (item.value / total * 100).toFixed(1) + '%'
+        }));
+
+        // 图表初始化
+        const myChart = echarts.init(document.getElementById('main'));
+
+        // 图表配置
+        const option = {
+            title: {
+                text: '各国用户分布',
+                fontSize: 20,
+                fontWeight: 'bold',
+                x: 'center'
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{b}: {c} ({d}%)'
+            },
+            legend: {
+                type: 'scroll',
+                orient: 'vertical',
+                right: 10,
+                top: 20
+            },
+            series: [
+                {
+                    name: '用户数',
+                    type: 'pie',
+                    data: formattedData,
+                    label: {
+                        show: true,
+                        formatter: '{b}\n{c} ({d}%)'
+                    },
+                    labelLine: {
+                        show: true
+                    },
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+
+        // 渲染图表
+        myChart.setOption(option);
+    </script>
+</body>
+</html>

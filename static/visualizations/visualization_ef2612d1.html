@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点击量分布饼图</title>
+    <!-- 引入ECharts库 -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        #chart-container {
+            width: 100%;
+            height: 500px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">商品点击量分布</h1>
+    <div id="chart-container"></div>
+
+    <script>
+        // 初始化图表
+        var myChart = echarts.init(document.getElementById('chart-container'));
+
+        // 处理数据
+        const data = [
+            {
+                "类目": "女式板鞋",
+                "点击量": 4245
+            },
+            {
+                "类目": "男士跑步鞋",
+                "点击量": 1456
+            },
+            {
+                "类目": "运动鞋",
+                "点击量": 453
+            },
+            {
+                "类目": "休闲鞋",
+                "点击量": 349
+            },
+            {
+                "类目": "时尚/休闲套装",
+                "点击量": 335
+            }
+        ];
+
+        // 提取类目和点击量
+        const categories = data.map(item => item.类目);
+        const clickCounts = data.map(item => item.点击量);
+
+        // 配置图表选项
+        const option = {
+            title: {
+                text: '商品点击量分布',
+                left: 'center',
+                top: 20,
+                textStyle: {
+                    fontSize: 20,
+                    fontWeight: 'bold',
+                    color: '#333'
+                }
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: '{a} <br/>{b}: {c} ({d}%)'
+            },
+            legend: {
+                type: 'scroll',
+                orient: 'vertical',
+                right: 10,
+                top: 20,
+                bottom: 20,
+                textStyle: {
+                    color: '#666'
+                }
+            },
+            series: [
+                {
+                    name: '点击量',
+                    type: 'pie',
+                    radius: '60%',
+                    center: ['40%', '50%'],
+                    data: data.map(item => ({
+                        name: item.类目,
+                        value: item.点击量
+                    })),
+                    emphasis: {
+                        itemStyle: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    },
+                    roseType: 'radius' // 设置为玫瑰图样式
+                }
+            ]
+        };
+
+        // 渲染图表
+        myChart.setOption(option);
+
+        // 响应窗口大小变化
+        window.addEventListener('resize', function () {
+            myChart.resize();
+        });
+    </script>
+</body>
+</html>

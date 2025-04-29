@@ -1,0 +1,64 @@
+{
+  "agents": [
+    {
+      "id": "data_analysis",
+      "name": "数据分析代理",
+      "description": "执行数据分析任务，生成分析结果",
+      "enabled": true,
+      "config": {
+        "model": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+        "service_type": "silicon_flow"
+      }
+    },
+    {
+      "id": "data_visualization",
+      "name": "数据可视化代理",
+      "description": "生成数据可视化图表，创建可视化HTML页面",
+      "enabled": true,
+      "config": {
+        "model": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+        "service_type": "silicon_flow"
+      }
+    },
+    {
+      "id": "data_analysis_plan",
+      "name": "数据分析方案生成代理",
+      "description": "根据数据信息和分析需求，生成合适的数据分析方案",
+      "enabled": true,
+      "config": {
+        "model": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+        "service_type": "silicon_flow"
+      }
+    },
+    {
+      "id": "data_analysis_conclusion",
+      "name": "数据分析结论代理",
+      "description": "根据数据生成分析结论和见解",
+      "enabled": true,
+      "config": {
+        "model": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+        "service_type": "silicon_flow"
+      }
+    },
+    {
+      "id": "user_intent",
+      "name": "用户意图识别代理",
+      "description": "根据用户输入，识别其意图",
+      "enabled": true,
+      "config": {
+        "model": "deepseek-ai/DeepSeek-R1-Distill-Qwen-32B",
+        "service_type": "silicon_flow"
+      }
+    },
+    {
+      "id": "default",
+      "name": "默认配置",
+      "description": "默认配置",
+      "enabled": true,
+      "config": {
+        "model": "deepseek-ai/DeepSeek-R1-Distill-Qwen-7B",
+        "service_type": "silicon_flow"
+      }
+    }
+  ]
+}
