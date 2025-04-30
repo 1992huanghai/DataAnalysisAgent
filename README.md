@@ -41,16 +41,6 @@ cd frontend
 npm install
 ```
 
-1. 安装Python依赖：
-```bash
-pip install -r requirements.txt
-```
-
-2. 安装额外依赖（包含python-dotenv）：
-```bash
-pip install python-dotenv
-```
-
 ## 环境配置 / Environment Configuration
 
 ### 必要配置项
@@ -76,20 +66,6 @@ SILICON_FLOW_API_BASE=https://api.siliconflow.cn/v1
 # 模型配置
 SILICON_LLM_MODEL_NAME=deepseek-ai/DeepSeek-R1-Distill-Qwen-7B
 ```
-### 环境要求
-- Node.js 18+
-- Python 3.10+
-
-### 后端安装
-```bash
-pip install -r requirements.txt
-```
-
-### 前端安装
-```bash
-cd frontend
-npm install
-```
 
 ### 运行指南
 
@@ -102,16 +78,6 @@ npm install
 └── ...
 ```
 
-启动后端服务：
-```bash
-uvicorn app.main:app --reload
-```
-
-启动前端应用：
-```bash
-cd frontend
-npm start
-```
 启动后端服务：
 ```bash
 uvicorn app.main:app --reload
