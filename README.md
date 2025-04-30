@@ -54,8 +54,8 @@ pip install python-dotenv
 ## 环境配置 / Environment Configuration
 
 ### 必要配置项
-- `SILICON_FLOW_API_KEY`: 从[硅基流动平台](https://platform.siliconflow.cn)获取API密钥  
-  _Get API key from [SiliconFlow Platform](https://platform.siliconflow.cn)_
+- `SILICON_FLOW_API_KEY`: 从[硅基流动平台](https://cloud.siliconflow.cn/account/ak)获取API密钥  
+  _Get API key from [SiliconFlow Platform](https://cloud.siliconflow.cn/account/ak)_
 - `SILICON_LLM_MODEL_NAME`: 使用的LLM模型名称  
   _LLM model name to use_
 
