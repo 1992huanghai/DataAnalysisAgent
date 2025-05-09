@@ -49,7 +49,7 @@ dist/
 *.egg
 
 # 前端
-/public/static
+/static
 .cache/
 /coverage
 
